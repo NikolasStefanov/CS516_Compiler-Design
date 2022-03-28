@@ -1,0 +1,9 @@
+
+struct Niko { int x; bool y }
+struct Jazz { int x; bool y; Niko n}
+
+int program(Niko stefanov, Jazz cinquegrana) {
+  stefanov = cinquegrana;
+  return 0;
+}
+/* Good */

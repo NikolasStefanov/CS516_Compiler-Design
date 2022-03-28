@@ -1,0 +1,98 @@
+struct Person {
+    string name;
+    int favorite_num
+}
+
+int max(int x, int y){
+    if(x>=y){
+        return x;
+    }
+    else{
+        return y;
+    }
+}
+
+void dp_LCS (string x, string y){
+    var arr_x = array_of_string(x);
+    var arr_y = array_of_string(y);
+    var len1 = length(arr_x);
+    var len2 = length(arr_y);
+
+    /* Make Matrix */
+
+    var mat = new int[][len1+1]{j -> new int[len2+1] };
+
+    /* Creating DP_Matrix */
+    for(var row = 1; row <= len1; row = row + 1;){
+        for(var col = 1; col <= len2; col = col + 1;){
+            if(arr_x[row-1] == arr_y[col-1]){
+                mat[row][col] = (mat[row-1][col-1])+1;
+            }
+            else{
+                mat[row][col] = max(mat[row-1][col], mat[row][col-1]);
+            }
+        }
+    }
+
+    var row = len1;
+    var col = len2;
+    var str_length = max(len1, len2);
+    var str = new int[ str_length ]{i -> 0};
+    var str_ind = str_length-1;
+
+    /* Backtracking */
+    while(row != 0 & col != 0){
+        if( arr_x[row-1] == arr_y[col-1] ){
+            str[str_ind] = arr_x[row-1];
+            str_ind = str_ind - 1;
+            row = row - 1;
+            col = col -1;
+        }
+        else{
+            if(mat[row-1][col] > mat[row][col-1]){
+                row = row - 1;
+            }
+            else{
+                col = col - 1;
+            }
+        }
+    }
+
+    var start_num = 0;
+    for(var i = 0; i < str_length; i = i + 1;) {
+        if( str[i] == 0) {
+            start_num = i;
+        }
+    }
+    start_num = start_num + 1;
+
+    var new_length = str_length-start_num;
+    var good_array = new int[new_length];
+
+    for( var index = start_num; index < str_length; index = index + 1;){
+        good_array[index-start_num] = str[index];
+    }
+
+    var retstr = string_of_array(good_array);
+    print_string(retstr);
+    print_string("\n");
+    print_string("Num was: ");
+    print_int(mat[len1][len2]);
+    print_string("\n");
+    return;
+}
+
+int program (int argc, string[] argv) {
+    var niko = new Person {name="Nikolas"; favorite_num=7};
+    var jazz = new Person {name="Jazz"; favorite_num=69};
+    var paul = new Person {name="Paul"; favorite_num=1732};
+    var chunko = new Person {name="Chunko"; favorite_num=80085};
+    var leo = new Person {name="Leo"; favorite_num=0};
+    dp_LCS(chunko.name, leo.name);
+    dp_LCS(niko.name, jazz.name);
+    dp_LCS("A Jolled ap||ɛ doɛs zγϐooks wiTh zɛbras", "Jaunty zeal0t zinc");
+    dp_LCS("Koskinen i know u cool", "Chunko i kar ote");
+    return 0;
+    }
+
+

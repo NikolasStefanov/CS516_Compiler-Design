@@ -1,0 +1,10 @@
+(library 
+ (name main)
+ (libraries X86 Assert Ll)
+ (modules backend driver gradedtests studenttests))
+
+(env
+  (dev
+    (flags 
+    (:standard -w -27-35-33)
+    )))

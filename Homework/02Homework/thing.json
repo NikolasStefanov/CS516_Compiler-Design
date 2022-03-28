@@ -1,0 +1,40 @@
+{
+    "terminal.integrated.shell.linux": "/bin/zsh",
+    "workbench.colorTheme": "Community Material Theme Darker High Contrast",
+    "workbench.iconTheme": "eq-material-theme-icons-ocean",
+    "window.zoomLevel": 1,
+    "git.enableSmartCommit": true,
+    "terminal.external.linuxExec": "pantheon-terminal",
+    "todo-tree.tree.showScanModeButton": false,
+    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|\\(\\*)\\s*($TAGS)|^\\s*- \\[ \\])",
+    "todo-tree.highlights.foregroundColourScheme": [
+        "white",
+        "black",
+        "white",
+        "white",
+        "black",
+        "green"
+    ],
+    "todo-tree.highlights.customHighlight": {
+        "TODO": {
+            "icon": "check",
+            "foreground": "white",
+            "background": "#d17da4"
+        },
+        "HACK": {
+            "icon": "skip",
+            "foreground": "white",
+            "background": "#d17da4"
+        },
+        "FIXME": {
+            "foreground": "white",
+            "background": "#d17da4",
+            "iconColour": "yellow",
+            "gutterIcon": true,
+            "icon": "flame"
+        },
+        "BUG": {
+            "icon": "bug"
+        }
+    }
+}

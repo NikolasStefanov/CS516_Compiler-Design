@@ -1,0 +1,78 @@
+/* John Cinquegrana and Nikolas Stefanov */
+/* I pledge my honor that I have abided by the Stevens Honor System */
+
+global set = new int[]{8, 23, 4, 23, 61, 12, 14, 13, 93, 12, 24, 25, 300};
+global set_length = 13;
+
+bool good_sum(int[] set, int sum) {
+    /* Returns true of the numbers in the set can be used to create
+    the specified sum */
+    var row_length = set_length + 1;
+    var col_length = sum + 1;
+    /* 13+1 different rows, each of length sum+1 */
+    var dp = new bool[][]{
+        new bool[col_length], new bool[col_length], new bool[col_length], new bool[col_length], new bool[col_length],
+        new bool[col_length], new bool[col_length], new bool[col_length], new bool[col_length], new bool[col_length],
+        new bool[col_length], new bool[col_length], new bool[col_length], new bool[col_length]
+    };
+    /* Row corresponds to each number in the set, column corresponds to each sub-sum */
+    /* Set the first row to all false, first col to all true. Value at 0,0 is true. */
+    for( var col = 1; col < col_length; col = col+1; ) {
+        dp[0][col] = false;
+    }
+    for( var row = 0; row < row_length; row = row + 1;) {
+        dp[row][0] = true;
+    }
+    for( var row = 1; row < row_length; row = row + 1;) {
+        var current_set_value = set[row-1];
+        for( var col = 1; col < col_length; col = col + 1;) {
+            if( col < current_set_value ){
+                dp[row][col] = dp[row-1][col];
+            }
+            else {
+                dp[row][col] = dp[row-1][col] | dp[row-1][col - current_set_value];
+            }
+        }
+    }
+    return dp[row_length-1][col_length-1];
+}
+
+int program(int argc, string[] argv) {
+	
+    var niko = good_sum(set, 96);
+    var jazz = good_sum(set, 57);
+    var chunko = good_sum(set, 420); /*Blaze*/
+    var leo = good_sum(set, 69); /*Nice*/
+    var koskinen = good_sum(set, 666);
+    var pul = good_sum(set, 1);
+    
+    var result = 0;
+
+    if(niko){
+        /* Should work */
+        result = result + 1;
+    }
+    if(jazz){
+        /* Should work */
+        result = result + 2;
+    }
+    if(chunko){
+        /* Should work */
+        result = result + 4;
+    }
+    if(leo){
+        /* Should work */
+        result = result + 8;
+    }
+    if(koskinen){
+        /* Doesn't work, what a lonely guy */
+        result = result + 16;
+    }
+    if( pul ) {
+        /* Shouldn't work, should not ever work, not in a million years paul */
+        result = result + 32;
+    }
+
+
+    return result;
+}

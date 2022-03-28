@@ -1,0 +1,40 @@
+; generated from: hw4programs/run40.oat
+target triple = "x86_64-apple-macosx10.13.0"
+@i = global i64 8
+
+define i64 @f() {
+  %j = alloca i64
+  store i64 0, i64* %j
+  %_ret871 = call i64 @_g()
+  store i64 %_ret871, i64* %j
+  %_local873 = load i64, i64* %j
+  %_fun_return872 = bitcast i64 %_local873 to i64
+  ret i64 %_fun_return872
+}
+
+define i64 @g() {
+  %_glob870 = load i64, i64* @_i
+  %_fun_return869 = bitcast i64 %_glob870 to i64
+  ret i64 %_fun_return869
+}
+
+define i64 @program(i64 %_argc863, { i64, [0 x i8*] }* %_argv864) {
+  %_argc865 = alloca i64
+  store i64 %_argc863, i64* %_argc865
+  %_argv866 = alloca { i64, [0 x i8*] }*
+  store { i64, [0 x i8*] }* %_argv864, { i64, [0 x i8*] }** %_argv866
+  %_ret868 = call i64 @_f()
+  %_fun_return867 = bitcast i64 %_ret868 to i64
+  ret i64 %_fun_return867
+}
+
+
+declare i64* @oat_alloc_array(i64)
+declare { i64, [0 x i64] }* @array_of_string(i8*)
+declare i8* @string_of_array({ i64, [0 x i64] }*)
+declare i64 @length_of_string(i8*)
+declare i8* @string_of_int(i64)
+declare i8* @string_cat(i8*, i8*)
+declare void @print_string(i8*)
+declare void @print_int(i64)
+declare void @print_bool(i1)
